@@ -1,0 +1,1205 @@
+
+html_content = '''<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bailar en China — Guía Completa para Bailarines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-bg-light: #12121a;
+            --color-accent: #ff2d95;
+            --color-accent-2: #00d4ff;
+            --color-accent-3: #ffaa00;
+            --color-text: #f0f0f5;
+            --color-text-muted: #8888a0;
+            --gradient-hero: linear-gradient(135deg, #ff2d95 0%, #8b5cf6 50%, #00d4ff 100%);
+            --gradient-card: linear-gradient(145deg, rgba(255,45,149,0.1) 0%, rgba(0,212,255,0.1) 100%);
+            --shadow-glow: 0 0 40px rgba(255,45,149,0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,45,149,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-hero);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--color-text);
+            transition: all 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--color-accent);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,45,149,0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(255,45,149,0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient-hero);
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(255,45,149,0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-text);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-15px); }
+            60% { transform: translateX(-50%) translateY(-7px); }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            stroke: var(--color-accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-hero);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-hero);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255,45,149,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: rgba(255,45,149,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,45,149,0.3);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        .card p, .card ul {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card ul li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-hero);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 80px;
+            padding-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 20px;
+            top: 5px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--color-bg);
+            border: 3px solid var(--color-accent);
+            box-shadow: 0 0 20px rgba(255,45,149,0.5);
+        }
+
+        .timeline-content {
+            background: var(--color-bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .timeline-content h3 {
+            color: var(--color-accent-2);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-content p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Warning Section */
+        .warning-section {
+            background: linear-gradient(145deg, rgba(255,0,0,0.05) 0%, rgba(255,170,0,0.05) 100%);
+            border: 1px solid rgba(255,170,0,0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+
+        .warning-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent-3);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .warning-list {
+            list-style: none;
+        }
+
+        .warning-list li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--color-text-muted);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .warning-list li::before {
+            content: '⚠';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent-3);
+        }
+
+        /* Tips Grid */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-box {
+            background: var(--color-bg-light);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid var(--color-accent-2);
+            transition: all 0.3s;
+        }
+
+        .tip-box:hover {
+            transform: scale(1.02);
+            border-left-color: var(--color-accent);
+        }
+
+        .tip-box h4 {
+            color: var(--color-accent-2);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .tip-box p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--color-bg-light);
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--color-accent);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 2rem 1.5rem;
+        }
+
+        .faq-answer p {
+            color: var(--color-text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--color-bg-light);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .copyright {
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: rgba(10,10,15,0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+            }
+
+            .timeline-dot {
+                left: 5px;
+            }
+
+            .warning-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Decorative elements */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .deco-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--color-accent);
+            top: 10%;
+            right: -10%;
+        }
+
+        .deco-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--color-accent-2);
+            bottom: 20%;
+            left: -5%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Decorative circles -->
+    <div class="deco-circle deco-1"></div>
+    <div class="deco-circle deco-2"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">BailarEnChina</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#requisitos">Requisitos</a></li>
+            <li><a href="#proceso">Proceso</a></li>
+            <li><a href="#trabajo">El Trabajo</a></li>
+            <li><a href="#consejos">Consejos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-badge">Guía Definitiva 2026</div>
+        <h1>Bailar en China</h1>
+        <p>Todo lo que necesitas saber para trabajar como bailarín o bailarina en China: visados, contratos, agencias, salarios y cómo evitar estafas. Tu puerta de entrada al mercado asiático.</p>
+        <div class="hero-buttons">
+            <a href="#requisitos" class="btn btn-primary">Comenzar Ahora</a>
+            <a href="#proceso" class="btn btn-outline">Ver el Proceso</a>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Requisitos Section -->
+    <section id="requisitos">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Requisitos Esenciales</h2>
+                <p>Documentos y condiciones indispensables para poder trabajar legalmente como bailarín en China.</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card reveal">
+                    <div class="card-icon">🎭</div>
+                    <h3>Experiencia Profesional</h3>
+                    <ul>
+                        <li>Mínimo 2-3 años de experiencia en escenario</li>
+                        <li>Video portfolio de alta calidad</li>
+                        <li>Fotos profesionales (vertical y horizontal)</li>
+                        <li>Currículum artístico actualizado</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">📋</div>
+                    <h3>Documentación Legal</h3>
+                    <ul>
+                        <li>Pasaporte válido (mínimo 1 año)</li>
+                        <li>Visa Z (de trabajo) antes de viajar</li>
+                        <li>Permiso de Residencia dentro de 30 días</li>
+                        <li>Certificado de antecedentes penales</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🏥</div>
+                    <h3>Salud y Formación</h3>
+                    <ul>
+                        <li>Examen médico completo (incluido VIH)</li>
+                        <li>Certificado de buena salud</li>
+                        <li>Vacunas actualizadas</li>
+                        <li>Seguro médico internacional</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">💼</div>
+                    <h3>Contrato de Trabajo</h3>
+                    <ul>
+                        <li>Contrato firmado antes de la visa</li>
+                        <li>Invitación oficial del empleador</li>
+                        <li>Permiso de trabajo emitido por China</li>
+                        <li>Cláusulas claras de salario y alojamiento</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">📸</div>
+                    <h3>Material de Promoción</h3>
+                    <ul>
+                        <li>Video de presentación (1-2 minutos)</li>
+                        <li>Fotos en traje de baile y casual</li>
+                        <li>Enlaces a redes sociales profesionales</li>
+                        <li>Referencias de trabajos anteriores</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🌏</div>
+                    <h3>Preparación Cultural</h3>
+                    <ul>
+                        <li>Conocimientos básicos de chino mandarín</li>
+                        <li>Adaptabilidad cultural</li>
+                        <li>Conocimiento de costumbres locales</li>
+                        <li>App de traducción instalada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso Section -->
+    <section id="proceso" style="background: var(--color-bg-light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Paso a Paso: El Proceso</h2>
+                <p>Desde la primera entrevista hasta tu primer día en el escenario chino.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 1</h3>
+                        <h4>Encuentra una Agencia o Empleador</h4>
+                        <p>Busca agencias especializadas en contratación de artistas para China. Verifica que tengan licencia y buenas referencias. NUNCA pagues por adelantado por "procesamiento de visa".</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 2</h3>
+                        <h4>Envía tu Material Artístico</h4>
+                        <p>Prepara un paquete profesional con fotos, videos y CV. La primera impresión cuenta mucho en el mercado asiático. Incluye tu estatura, peso y medidas si es necesario.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 3</h3>
+                        <h4>Entrevista y Selección</h4>
+                        <p>Generalmente se realiza por videollamada. Pueden pedirte bailar en vivo. Demuestra profesionalismo, puntualidad y actitud positiva. Pregunta TODO sobre el contrato.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 4</h3>
+                        <h4>Firma del Contrato</h4>
+                        <p>Lee cada cláusula. Verifica: duración, salario mensual, días libres, alojamiento, comidas, transporte, seguro médico y penalización por rescisión. Busca asesoría legal si es posible.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 5</h3>
+                        <h4>Solicitud de Visa Z</h4>
+                        <p>Tu empleador debe enviarte una "Notification Letter of Foreigner's Work Permit in China" y una "Invitation Letter". Con estos documentos, aplica en el consulado chino de tu país.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 6</h3>
+                        <h4>Viaje y Permiso de Residencia</h4>
+                        <p>Al llegar a China, tienes 30 días para convertir tu visa Z en Permiso de Residencia. Tu empleador o agencia debe ayudarte con este trámite en la oficina de seguridad pública.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Paso 7</h3>
+                        <h4>Comienza a Bailar</h4>
+                        <p>¡Felicidades! Ahora eres un bailarín legal en China. Cumple con tus horarios, mantén una actitud profesional y disfruta de esta experiencia única.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- El Trabajo Section -->
+    <section id="trabajo">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>El Trabajo en China</h2>
+                <p>Qué esperar una vez que estés allí: condiciones, salarios y estilo de vida.</p>
+            </div>
+            <div class="cards-grid">
+                <div class="card reveal">
+                    <div class="card-icon">💰</div>
+                    <h3>Salarios y Pagos</h3>
+                    <ul>
+                        <li>Promedio: $1,500 - $4,000 USD/mes</li>
+                        <li>Generalmente en efectivo o transferencia</li>
+                        <li>Pago mensual, a veces quincenal</li>
+                        <li>Propinas varían según el local</li>
+                        <li>Asegúrate de que sea en dólares o yuanes estables</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🏠</div>
+                    <h3>Alojamiento</h3>
+                    <ul>
+                        <li>La mayoría proporciona apartamento compartido</li>
+                        <li>Generalmente cerca del trabajo</li>
+                        <li>Pregunta si incluye WiFi, agua y luz</li>
+                        <li>Puede ser compartido con otros artistas</li>
+                        <li>Algunos empleadores dan subsidio en lugar de piso</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🕐</div>
+                    <h3>Horarios y Descanso</h3>
+                    <ul>
+                        <li>Generalmente 6 días de trabajo, 1 de descanso</li>
+                        <li>Shows nocturnos (22:00 - 04:00)</li>
+                        <li>Sets de 15-25 minutos con descansos</li>
+                        <li>3-5 shows por noche dependiendo del club</li>
+                        <li>Algunos contratos incluyen ensayos diarios</li>
+                    </ul>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon">🎪</div>
+                    <h3>Tipos de Shows</h3>
+                    <ul>
+                        <li>Clubs nocturnos y discotecas</li>
+                        <li>Teatros y espectáculos temáticos</li>
+                        <li>Eventos corporativos y privados</li>
+                        <li>Resorts y hoteles de lujo</li>
+                        <li>Cruises y entretenimiento flotante</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Section -->
+    <section style="background: var(--color-bg-light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>⚠️ Alertas y Estafas</h2>
+                <p>Protege tu carrera y tu seguridad. Esto es CRÍTICO.</p>
+            </div>
+            <div class="warning-section reveal">
+                <div class="warning-title">
+                    <span style="font-size: 2rem;">🚨</span>
+                    Señales de Alerta Roja
+                </div>
+                <ul class="warning-list">
+                    <li><strong>NUNCA pagues por adelantado</strong> por visa, procesos o "garantías". Los empleadores legítimos cubren estos costos o te reembolsan.</li>
+                    <li><strong>Desconfía de salarios exagerados</strong> ($8,000+ USD para bailarines principiantes). Si suena demasiado bueno, probablemente lo sea.</li>
+                    <li><strong>Verifica la agencia</strong>: busca reseñas en grupos de Facebook, foros de bailarines y comunidades latinas en China.</li>
+                    <li><strong>El contrato debe estar en inglés o español</strong> además de chino. No firmes lo que no entiendas.</li>
+                    <li><strong>Confiscación de pasaporte</strong> es ILEGAL. Nadie puede quedarse con tu pasaporte, ni siquiera tu empleador.</li>
+                    <li><strong>Visa turística para trabajar</strong> es ILEGAL y te expone a deportación, multas y prohibición de entrada.</li>
+                    <li><strong>Trabajo sexual encubierto</strong>: si te piden "interactuar con clientes" de forma íntima, es una trampa. Sal inmediatamente.</li>
+                    <li><strong>Comunicación solo por WhatsApp/Telegram</strong> sin datos de empresa real, dirección o página web. Exige transparencia.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consejos Section -->
+    <section id="consejos">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Consejos de Oro</h2>
+                <p>Recomendaciones de bailarines que ya vivieron la experiencia.</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-box reveal">
+                    <h4>💡 Antes de Viajar</h4>
+                    <p>Abre una cuenta bancaria internacional (Wise, Revolut). Lleva dólares en efectivo de emergencia. Haz copias digitales de TODOS tus documentos.</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>📱 Apps Esenciales</h4>
+                    <p>Descarga WeChat (indispensable), Baidu Maps, DiDi (taxi), Pleco (traductor) y una VPN antes de llegar (ExpressVPN, NordVPN).</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>🤝 Networking</h4>
+                    <p>Únete a grupos de WhatsApp/Facebook de bailarines en China. La comunidad latina es fuerte y se apoya mutuamente.</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>💊 Salud</h4>
+                    <p>Lleva medicamentos personales suficientes. El sistema médico es diferente y algunos medicamentos occidentales no se consiguen fácilmente.</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>📸 Redes Sociales</h4>
+                    <p>Crea un perfil profesional en Instagram/TikTok. Muchos empleadores chinos buscan talento directamente en redes.</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>🧘 Bienestar Mental</h4>
+                    <p>La cultura shock es real. Mantén contacto con tu familia, haz ejercicio y encuentra hobbies fuera del trabajo.</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>📝 Documenta Todo</h4>
+                    <p>Guarda capturas de pantalla de conversaciones, contratos y pagos. En caso de disputa, tendrás evidencia.</p>
+                </div>
+                <div class="tip-box reveal">
+                    <h4>🎓 Aprende Chino</h4>
+                    <p>Incluso frases básicas abren puertas. "Nǐ hǎo" (hola), "Xièxiè" (gracias), "Duōshao qián" (¿cuánto cuesta?).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" style="background: var(--color-bg-light);">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Preguntas Frecuentes</h2>
+                <p>Las dudas más comunes de bailarines que quieren ir a China.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Necesito saber chino para trabajar como bailarín en China?</div>
+                    <div class="faq-answer">
+                        <p>No es obligatorio, pero es extremadamente útil. En el trabajo artístico generalmente te comunicarás en inglés o mediante traductores. Sin embargo, saber frases básicas de mandarín facilitará enormemente tu día a día, compras, transporte y relaciones con compañeros chinos. Te recomendamos aprender al menos lo básico antes de viajar.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Cuánto dinero debo llevar para los primeros días?</div>
+                    <div class="faq-answer">
+                        <p>Te recomendamos llevar entre $500 y $1,000 USD en efectivo para gastos iniciales mientras te adaptas y recibes tu primer salario. Aunque muchos lugares aceptan WeChat Pay, necesitarás una cuenta bancaria china para vincularla, lo cual puede tomar algunos días. También lleva una tarjeta de débito/crédito internacional como respaldo.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Es seguro trabajar como bailarín en China?</div>
+                    <div class="faq-answer">
+                        <p>China es un país generalmente seguro con bajos índices de criminalidad violenta. Sin embargo, el riesgo principal proviene de agencias o empleadores fraudulentos. Si trabajas con una agencia verificada, contrato legal y visa correcta, la experiencia suele ser positiva. Sigue nuestras alertas de estafa y confía en tu instinto.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Puedo llevar a mi pareja o familia?</div>
+                    <div class="faq-answer">
+                        <p>Depende del contrato. Algunos empleadores permiten parejas (especialmente si ambos son bailarines), pero generalmente el contrato es individual. Los familiares directos pueden solicitar visa de visitante (L) para estar contigo temporalmente, pero no pueden trabajar legalmente con esa visa.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Qué pasa si quiero irme antes de que termine el contrato?</div>
+                    <div class="faq-answer">
+                        <p>Revisa las cláusulas de penalización en tu contrato ANTES de firmar. Algunos contratos incluyen multas por rescisión anticipada. Si tienes una emergencia grave, comunícate con tu consulado. Nunca abandones el trabajo sin notificar; esto puede afectar tu registro migratorio y futuras visas.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Cuánto tiempo dura el proceso desde la entrevista hasta viajar?</div>
+                    <div class="faq-answer">
+                        <p>Generalmente entre 1 y 3 meses. El proceso incluye: selección (1-2 semanas), preparación de documentos por parte del empleador (2-4 semanas), trámite de visa en tu país (1-3 semanas), y compra de vuelos. Los tiempos varían según la eficiencia de la agencia y la carga de trabajo del consulado chino.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Puedo cambiar de empleador una vez en China?</div>
+                    <div class="faq-answer">
+                        <p>Legalmente sí, pero es complicado. Necesitas que tu nuevo empleador solicite un nuevo permiso de trabajo y debes cancelar el anterior. Durante la transición, tu visa puede quedar en un limbo legal. Te recomendamos terminar tu contrato actual antes de buscar otro, o negociar una rescisión amistosa.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <div class="faq-question">¿Qué estilos de baile se buscan más en China?</div>
+                    <div class="faq-answer">
+                        <p>Los más demandados son: bailarines de salsa y bachata (muy populares en clubs latinos), gogós y showgirls para discotecas, bailarines de pole dance, acróbatas, y artistas de cirque/contemporáneo. También hay demanda de bailarines de hip-hop y K-pop. La apariencia física y la energía escénica son muy valoradas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="text-align: center;">
+        <div class="container reveal">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1rem;">¿Listo para tu aventura?</h2>
+            <p style="color: var(--color-text-muted); max-width: 600px; margin: 0 auto 2rem;">Prepara tu material, investiga bien y da el primer paso hacia una experiencia inolvidable en el escenario chino.</p>
+            <a href="#requisitos" class="btn btn-primary">Revisar Requisitos</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">BailarEnChina</div>
+            <p class="footer-text">Guía independiente para bailarines latinos que sueñan con conquistar los escenarios de China. Información verificada y consejos reales.</p>
+            <div class="footer-links">
+                <a href="#requisitos">Requisitos</a>
+                <a href="#proceso">Proceso</a>
+                <a href="#consejos">Consejos</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <p class="copyright">© 2026 BailarEnChina. Información con fines educativos. Siempre verifica con fuentes oficiales.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+            const colors = ['#ff2d95', '#00d4ff', '#ffaa00', '#8b5cf6'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particlesContainer.appendChild(particle);
+        }
+
+        // Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal, .timeline-item');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10,10,15,0.95)';
+                navbar.style.boxShadow = '0 5px 30px rgba(0,0,0,0.5)';
+            } else {
+                navbar.style.background = 'rgba(10,10,15,0.85)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // Open clicked if wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>'''
+
+with open('/mnt/agents/output/bailar_en_china.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("✅ Sitio web creado exitosamente!")
+print("📁 Archivo guardado en: /mnt/agents/output/bailar_en_china.html")
