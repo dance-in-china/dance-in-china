@@ -1464,32 +1464,30 @@ html_content = '''<!DOCTYPE html>
                 }
             });
         });
-                // ===== VACANTES SYSTEM =====
+                        // ===== VACANTES SYSTEM =====
         const vacantesGrid = document.getElementById('vacantesGrid');
         const vacanteForm = document.getElementById('vacanteForm');
         const filterBtns = document.querySelectorAll('.filter-btn');
 
-        // Default vacancies
+        // Default vacancies (EDIT THESE!)
         const defaultVacantes = [
             {
                 id: 'default1',
                 club: 'Club Latino Shanghai',
                 ciudad: 'Shanghai',
                 tipo: 'Salsa & Bachata',
-                salario: '$1,200 - $1,500 USD/mes',
+                salario: '$2,800 - $3,500 USD/mes',
                 requisitos: 'Bailarin/a con experiencia en pareja. Minimo 2 anos en escenario. Estatura: hombres 175cm+, mujeres 165cm+. Ingles basico.',
-                contacto: 'WhatsApp: +86 138 1234 5678',
-                fecha: new Date().toISOString()
+                contacto: 'WhatsApp: +86 138 1234 5678'
             },
             {
                 id: 'default2',
                 club: 'Phoenix Night Club',
                 ciudad: 'Shenzhen',
                 tipo: 'Go-Go / Showgirl',
-                salario: '$2,000 - $2,200 USD/mes',
+                salario: '$3,000 - $4,200 USD/mes',
                 requisitos: 'Energia escenica alta. Experiencia en clubes nocturnos. Disponibilidad 6 dias/semana. Alojamiento incluido.',
-                contacto: 'Telegram: @phoenix_hr',
-                fecha: new Date().toISOString()
+                contacto: 'Telegram: @phoenix_hr'
             },
             {
                 id: 'default3',
@@ -1498,8 +1496,7 @@ html_content = '''<!DOCTYPE html>
                 tipo: 'Pole Dance / Acrobacia',
                 salario: '$2,500 - $3,800 USD/mes',
                 requisitos: 'Nivel intermedio-avanzado de pole. Flexibilidad y fuerza. Shows tematicos. Contrato de 6 meses.',
-                contacto: 'Email: casting@imperialshow.cn',
-                fecha: new Date().toISOString()
+                contacto: 'Email: casting@imperialshow.cn'
             },
             {
                 id: 'default4',
@@ -1508,18 +1505,28 @@ html_content = '''<!DOCTYPE html>
                 tipo: 'Hip-Hop / K-Pop',
                 salario: '$2,200 - $3,000 USD/mes',
                 requisitos: 'Grupo de 4-6 bailarines. Coreografias sincronizadas. Edad 20-30 anos. Pasaporte valido.',
-                contacto: 'WhatsApp: +86 139 8765 4321',
-                fecha: new Date().toISOString()
+                contacto: 'WhatsApp: +86 139 8765 4321'
             }
         ];
 
         function getVacantes() {
+            // ALWAYS use defaultVacantes from code, ignore old localStorage
+            // This way when you edit code on GitHub, changes show immediately
             const stored = localStorage.getItem('vacantes_bailar_china');
+            let userVacantes = [];
             if (stored) {
-                return JSON.parse(stored);
+                try {
+                    const parsed = JSON.parse(stored);
+                    // Only keep user-added vacantes (id starts with 'vac_')
+                    userVacantes = parsed.filter(function(v) {
+                        return v.id && v.id.indexOf('vac_') === 0;
+                    });
+                } catch(e) {
+                    userVacantes = [];
+                }
             }
-            localStorage.setItem('vacantes_bailar_china', JSON.stringify(defaultVacantes));
-            return defaultVacantes;
+            // Merge default + user-added
+            return defaultVacantes.concat(userVacantes);
         }
 
         function saveVacantes(vacantes) {
