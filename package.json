@@ -1,0 +1,21 @@
+{
+  "name": "dance-in-china",
+  "version": "1.0.0",
+  "description": "Bailar en China — Guía Completa para Bailarines",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static HTML build complete'",
+    "lint": "echo 'No linter configured for static HTML'"
+  },
+  "keywords": [
+    "dance",
+    "china",
+    "guide"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
