@@ -622,6 +622,218 @@ html_content = '''<!DOCTYPE html>
         .footer-links a:hover {
             color: var(--color-accent);
         }
+                /* ===== VACANTES STYLES ===== */
+        .vacantes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .vacante-card {
+            background: var(--color-bg-light);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .vacante-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,45,149,0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .vacante-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-hero);
+        }
+
+        .vacante-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .vacante-club {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .vacante-ciudad {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0,212,255,0.1);
+            color: var(--color-accent-2);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0,212,255,0.2);
+        }
+
+        .vacante-salario {
+            font-size: 1.4rem;
+            font-weight: 900;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0.5rem 0;
+        }
+
+        .vacante-tipo {
+            color: var(--color-accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .vacante-requisitos {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .vacante-contacto {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1rem;
+            background: rgba(255,45,149,0.08);
+            border-radius: 10px;
+            color: var(--color-accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .vacante-delete {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,0,0,0.2);
+            border: none;
+            color: #ff4444;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .vacante-card:hover .vacante-delete {
+            opacity: 1;
+        }
+
+        .vacante-delete:hover {
+            background: rgba(255,0,0,0.4);
+        }
+
+        .vacante-form {
+            background: var(--color-bg-light);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--color-text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(255,45,149,0.1);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.2);
+        }
+
+        .filters .btn {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        .filters .btn.active {
+            background: var(--gradient-hero);
+            border-color: transparent;
+            color: white;
+        }
+
+        .no-vacantes {
+            text-align: center;
+            color: var(--color-text-muted);
+            padding: 3rem;
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 768px) {
+            .vacante-card {
+                padding: 1.5rem;
+            }
+            .vacante-form {
+                padding: 1.5rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .vacante-delete {
+                opacity: 1;
+            }
+        }
 
         .copyright {
             color: var(--color-text-muted);
@@ -734,6 +946,7 @@ html_content = '''<!DOCTYPE html>
             <li><a href="#requisitos">Requisitos</a></li>
             <li><a href="#proceso">Proceso</a></li>
             <li><a href="#trabajo">El Trabajo</a></li>
+            <li><a href="#vacantes">Vacantes</a></li>
             <li><a href="#consejos">Consejos</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -1025,6 +1238,76 @@ html_content = '''<!DOCTYPE html>
             </div>
         </div>
     </section>
+        <!-- Vacantes Section -->
+    <section id="vacantes">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Vacantes de Trabajo</h2>
+                <p>Oportunidades actuales para bailarines en China. Verifica siempre antes de aplicar.</p>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters reveal" style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-bottom:2rem;">
+                <button class="btn btn-outline filter-btn active" data-filter="all">Todas</button>
+                <button class="btn btn-outline filter-btn" data-filter="Shanghai">Shanghái</button>
+                <button class="btn btn-outline filter-btn" data-filter="Beijing">Pekín</button>
+                <button class="btn btn-outline filter-btn" data-filter="Shenzhen">Shenzhen</button>
+                <button class="btn btn-outline filter-btn" data-filter="Guangzhou">Cantón</button>
+                <button class="btn btn-outline filter-btn" data-filter="Otros">Otros</button>
+            </div>
+
+            <!-- Lista de vacantes -->
+            <div class="vacantes-grid" id="vacantesGrid">
+                <!-- Las vacantes se cargan desde JS -->
+            </div>
+
+            <!-- Formulario para agregar vacante -->
+            <div class="form-section reveal" style="margin-top:4rem;">
+                <div class="section-header" style="margin-bottom:2rem;">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size:1.8rem;">Publicar una Vacante</h3>
+                    <p style="color:var(--color-text-muted);">Eres agencia o club? Publica tu oferta aqui. Los datos se guardan solo en este navegador.</p>
+                </div>
+                <form id="vacanteForm" class="vacante-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre del Club / Local</label>
+                            <input type="text" id="vClub" required placeholder="Ej: Club Latino Shanghai">
+                        </div>
+                        <div class="form-group">
+                            <label>Ciudad</label>
+                            <select id="vCiudad" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="Shanghai">Shanghái</option>
+                                <option value="Beijing">Pekín</option>
+                                <option value="Shenzhen">Shenzhen</option>
+                                <option value="Guangzhou">Cantón</option>
+                                <option value="Chengdu">Chengdu</option>
+                                <option value="Hangzhou">Hangzhou</option>
+                                <option value="Otros">Otra ciudad</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Baile</label>
+                            <input type="text" id="vTipo" required placeholder="Ej: Salsa, Bachata, Go-Go">
+                        </div>
+                        <div class="form-group">
+                            <label>Salario (USD/mes)</label>
+                            <input type="text" id="vSalario" required placeholder="Ej: 2500 - 3500">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Requisitos</label>
+                            <textarea id="vRequisitos" rows="3" required placeholder="Experiencia, estatura, idiomas..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Contacto (WhatsApp / Email / Telegram)</label>
+                            <input type="text" id="vContacto" required placeholder="+86 138 0000 0000">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="margin-top:1.5rem;">Publicar Vacante</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- FAQ Section -->
     <section id="faq" style="background: var(--color-bg-light);">
@@ -1104,6 +1387,7 @@ html_content = '''<!DOCTYPE html>
                 <a href="#requisitos">Requisitos</a>
                 <a href="#proceso">Proceso</a>
                 <a href="#consejos">Consejos</a>
+                <a href="#vacantes">Vacantes</a>
                 <a href="#faq">FAQ</a>
             </div>
             <p class="copyright">© 2026 BailarEnChina. Información con fines educativos. Siempre verifica con fuentes oficiales.</p>
@@ -1180,6 +1464,148 @@ html_content = '''<!DOCTYPE html>
                 }
             });
         });
+                // ===== VACANTES SYSTEM =====
+        const vacantesGrid = document.getElementById('vacantesGrid');
+        const vacanteForm = document.getElementById('vacanteForm');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // Default vacancies
+        const defaultVacantes = [
+            {
+                id: 'default1',
+                club: 'Club Latino Shanghai',
+                ciudad: 'Shanghai',
+                tipo: 'Salsa & Bachata',
+                salario: '$2,800 - $3,500 USD/mes',
+                requisitos: 'Bailarin/a con experiencia en pareja. Minimo 2 anos en escenario. Estatura: hombres 175cm+, mujeres 165cm+. Ingles basico.',
+                contacto: 'WhatsApp: +86 138 1234 5678',
+                fecha: new Date().toISOString()
+            },
+            {
+                id: 'default2',
+                club: 'Phoenix Night Club',
+                ciudad: 'Shenzhen',
+                tipo: 'Go-Go / Showgirl',
+                salario: '$3,000 - $4,200 USD/mes',
+                requisitos: 'Energia escenica alta. Experiencia en clubes nocturnos. Disponibilidad 6 dias/semana. Alojamiento incluido.',
+                contacto: 'Telegram: @phoenix_hr',
+                fecha: new Date().toISOString()
+            },
+            {
+                id: 'default3',
+                club: 'Imperial Show Beijing',
+                ciudad: 'Beijing',
+                tipo: 'Pole Dance / Acrobacia',
+                salario: '$2,500 - $3,800 USD/mes',
+                requisitos: 'Nivel intermedio-avanzado de pole. Flexibilidad y fuerza. Shows tematicos. Contrato de 6 meses.',
+                contacto: 'Email: casting@imperialshow.cn',
+                fecha: new Date().toISOString()
+            },
+            {
+                id: 'default4',
+                club: 'Canton Dance Lounge',
+                ciudad: 'Guangzhou',
+                tipo: 'Hip-Hop / K-Pop',
+                salario: '$2,200 - $3,000 USD/mes',
+                requisitos: 'Grupo de 4-6 bailarines. Coreografias sincronizadas. Edad 20-30 anos. Pasaporte valido.',
+                contacto: 'WhatsApp: +86 139 8765 4321',
+                fecha: new Date().toISOString()
+            }
+        ];
+
+        function getVacantes() {
+            const stored = localStorage.getItem('vacantes_bailar_china');
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            localStorage.setItem('vacantes_bailar_china', JSON.stringify(defaultVacantes));
+            return defaultVacantes;
+        }
+
+        function saveVacantes(vacantes) {
+            localStorage.setItem('vacantes_bailar_china', JSON.stringify(vacantes));
+        }
+
+        function renderVacantes(filter) {
+            filter = filter || 'all';
+            const vacantes = getVacantes();
+            vacantesGrid.innerHTML = '';
+
+            const filtered = filter === 'all' ? vacantes : vacantes.filter(function(v) {
+                return v.ciudad === filter;
+            });
+
+            if (filtered.length === 0) {
+                vacantesGrid.innerHTML = '<div class="no-vacantes">No hay vacantes en esta ciudad por ahora.</div>';
+                return;
+            }
+
+            filtered.forEach(function(v) {
+                const card = document.createElement('div');
+                card.className = 'vacante-card';
+                card.innerHTML = 
+                    '<button class="vacante-delete" onclick="deleteVacante(\'' + v.id + '\')" title="Eliminar">x</button>' +
+                    '<div class="vacante-header">' +
+                        '<div>' +
+                            '<div class="vacante-club">' + v.club + '</div>' +
+                            '<div class="vacante-tipo">' + v.tipo + '</div>' +
+                        '</div>' +
+                        '<span class="vacante-ciudad">' + v.ciudad + '</span>' +
+                    '</div>' +
+                    '<div class="vacante-salario">' + v.salario + '</div>' +
+                    '<div class="vacante-requisitos">' + v.requisitos + '</div>' +
+                    '<div class="vacante-contacto">&#128241; ' + v.contacto + '</div>';
+                vacantesGrid.appendChild(card);
+            });
+        }
+
+        window.deleteVacante = function(id) {
+            if (!confirm('Eliminar esta vacante?')) return;
+            let vacantes = getVacantes();
+            vacantes = vacantes.filter(function(v) {
+                return v.id !== id;
+            });
+            saveVacantes(vacantes);
+            const activeBtn = document.querySelector('.filter-btn.active');
+            renderVacantes(activeBtn ? activeBtn.dataset.filter : 'all');
+        };
+
+        // Filter buttons
+        filterBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                renderVacantes(btn.dataset.filter);
+            });
+        });
+
+        // Form submit
+        vacanteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevaVacante = {
+                id: 'vac_' + Date.now(),
+                club: document.getElementById('vClub').value.trim(),
+                ciudad: document.getElementById('vCiudad').value,
+                tipo: document.getElementById('vTipo').value.trim(),
+                salario: document.getElementById('vSalario').value.trim(),
+                requisitos: document.getElementById('vRequisitos').value.trim(),
+                contacto: document.getElementById('vContacto').value.trim(),
+                fecha: new Date().toISOString()
+            };
+
+            const vacantes = getVacantes();
+            vacantes.unshift(nuevaVacante);
+            saveVacantes(vacantes);
+
+            vacanteForm.reset();
+            const activeBtn = document.querySelector('.filter-btn.active');
+            renderVacantes(activeBtn ? activeBtn.dataset.filter : 'all');
+
+            vacantesGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // Initial render
+        renderVacantes();
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
